@@ -1,0 +1,163 @@
+{% extends "base.html" %}
+{% block title %}Neyo Integrated Farm Services Nigeria Limited — From Soil to Table{% endblock %}
+{% block content %}
+
+<section class="hero">
+  <div class="hero__grid">
+    <div class="hero__content">
+      <span class="hero__badge">Nigeria&#x27;s Integrated Farm Network</span>
+      <h1 class="hero__title">Fresh from the Farm.<br><em>Straight to Your Table.</em></h1>
+      <p class="hero__desc">Neyo Integrated Farm Services Nigeria Limited delivers premium crops, poultry, fish, snails, and pork — cultivated with care, harvested with pride, delivered fresh.</p>
+      <div class="hero__actions">
+        <a href="/shop" class="btn btn--primary">Shop Now</a>
+        <a href="/about" class="btn btn--outline">Our Story</a>
+      </div>
+      <div class="hero__stats">
+        <div><span class="hero__stat-num" data-target="500" data-suffix="+">0+</span><span class="hero__stat-label">Happy Customers</span></div>
+        <div><span class="hero__stat-num" data-target="5" data-suffix="">0</span><span class="hero__stat-label">Farm Divisions</span></div>
+        <div><span class="hero__stat-num" data-target="10" data-suffix="+ yrs">0</span><span class="hero__stat-label">Experience</span></div>
+      </div>
+    </div>
+    <div class="hero__visual">
+      <div class="hero__img-frame">
+        <img src="https://images.unsplash.com/photo-1500076656116-558758f991c1?w=800" alt="Neyo Farms" />
+      </div>
+      <div class="hero__float-card">
+        <span class="hero__float-icon">&#x1F33E;</span>
+        <div>
+          <span class="hero__float-num">100%</span>
+          <span class="hero__float-text">Farm Fresh, Always</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Our Divisions</span>
+      <h2>Everything Under One Farm</h2>
+      <p>Five integrated divisions working in harmony to bring you the best agricultural produce Nigeria has to offer.</p>
+    </div>
+    <div class="services-grid">
+      <div class="service-card">
+        <div class="service-card__icon">&#x1F33D;</div>
+        <h3 class="service-card__title">Crop Farming</h3>
+        <p class="service-card__desc">Premium yams, fresh pepper, and tender maize grown on fertile Nigerian soil.</p>
+        <a href="/services#crops" style="font-size:0.85rem;color:var(--green-mid);font-weight:600;display:block;margin-top:1rem;">Learn more &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">&#x1F413;</div>
+        <h3 class="service-card__title">Neyo Poultry</h3>
+        <p class="service-card__desc">Healthy broilers and fresh table eggs from our modern, biosecure poultry facility.</p>
+        <a href="/services#poultry" style="font-size:0.85rem;color:var(--green-mid);font-weight:600;display:block;margin-top:1rem;">Learn more &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">&#x1F41F;</div>
+        <h3 class="service-card__title">Neyo Fish</h3>
+        <p class="service-card__desc">Fresh catfish and tilapia from well-maintained, clean-water pond systems.</p>
+        <a href="/services#fish" style="font-size:0.85rem;color:var(--green-mid);font-weight:600;display:block;margin-top:1rem;">Learn more &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">&#x1F40C;</div>
+        <h3 class="service-card__title">Neyo Snails</h3>
+        <p class="service-card__desc">Giant African land snails — a high-protein, low-fat delicacy, commercially grown.</p>
+        <a href="/services#snails" style="font-size:0.85rem;color:var(--green-mid);font-weight:600;display:block;margin-top:1rem;">Learn more &rarr;</a>
+      </div>
+      <div class="service-card">
+        <div class="service-card__icon">&#x1F416;</div>
+        <h3 class="service-card__title">Pig Farming</h3>
+        <p class="service-card__desc">Organically raised pigs — live weaners and fresh dressed pork for bulk buyers.</p>
+        <a href="/services#pig" style="font-size:0.85rem;color:var(--green-mid);font-weight:600;display:block;margin-top:1rem;">Learn more &rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--alt">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Fresh Produce</span>
+      <h2>Shop Our Products</h2>
+      <p>Order directly from the farm. Guaranteed fresh, competitively priced, delivered to your door.</p>
+    </div>
+    <div class="products-grid">
+      {% for product in products %}
+      <div class="product-card">
+        <img class="product-card__img" src="{{ product.image_url or 'https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=400' }}" alt="{{ product.name }}" />
+        <div class="product-card__body">
+          <div class="product-card__cat">{{ product.category }}</div>
+          <div class="product-card__name">{{ product.name }}</div>
+          <p class="product-card__desc">{{ product.description[:80] }}...</p>
+          <div class="product-card__footer">
+            <div>
+              <div class="product-card__price">&#x20A6;{{ "{:,.0f}".format(product.price) }}</div>
+              <div class="product-card__unit">per {{ product.unit }}</div>
+            </div>
+            <a href="/order/{{ product.id }}" class="btn btn--green btn--sm">Order</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div style="text-align:center;margin-top:2.5rem;"><a href="/shop" class="btn btn--primary">View All Products</a></div>
+  </div>
+</section>
+
+<section class="section section--dark">
+  <div class="container">
+    <div class="about-grid">
+      <div>
+        <span class="section-label">Why Neyo?</span>
+        <h2 style="color:var(--white)">Integrated Farming for a Better Nigeria</h2>
+        <p style="color:rgba(255,255,255,0.75);margin:1rem 0 1.5rem;line-height:1.8;">At Neyo, we combine crop farming, livestock, aquaculture, and specialty farming under one roof — reducing waste, maximising land use, and guaranteeing food security for our communities.</p>
+        <div class="values-grid">
+          <div class="value-item"><h4>Farm Fresh</h4><p>Harvested and delivered at peak freshness, always.</p></div>
+          <div class="value-item"><h4>Traceable</h4><p>Know exactly where your food comes from.</p></div>
+          <div class="value-item"><h4>Affordable</h4><p>Farm-direct prices, no middlemen.</p></div>
+          <div class="value-item"><h4>Sustainable</h4><p>Responsible farming methods for future generations.</p></div>
+        </div>
+        <a href="/about" class="btn btn--primary" style="margin-top:2rem;">About Neyo</a>
+      </div>
+      <div class="about-img" style="aspect-ratio:1;border-radius:12px;overflow:hidden;"><img src="https://images.unsplash.com/photo-1464226184884-fa280b87c399?w=600" alt="Neyo Farm" style="width:100%;height:100%;object-fit:cover;"/></div>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container">
+    <div class="section-header">
+      <span class="section-label">Farm Journal</span>
+      <h2>From Our Blog</h2>
+      <p>Tips, insights, and news from the fields of Neyo Integrated Farm Services.</p>
+    </div>
+    <div class="blog-grid">
+      {% for post in posts %}
+      <div class="blog-card">
+        <img class="blog-card__img" src="{{ post.image_url or 'https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=600' }}" alt="{{ post.title }}" />
+        <div class="blog-card__body">
+          <div class="blog-card__cat">{{ post.category or 'Farming' }}</div>
+          <h3 class="blog-card__title">{{ post.title }}</h3>
+          <p class="blog-card__excerpt">{{ post.excerpt or post.content[:100] }}...</p>
+          <a href="/blog/{{ post.slug }}" class="blog-card__link">Read More &rarr;</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+<section class="cta-band">
+  <div class="container">
+    <span class="section-label" style="color:var(--gold-light)">Ready to Order?</span>
+    <h2>Get Farm-Fresh Produce Delivered</h2>
+    <p>Place your order today and experience the Neyo difference — quality you can taste.</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <a href="/shop" class="btn btn--primary">Shop Now</a>
+      <a href="/contact" class="btn btn--outline">Contact Us</a>
+    </div>
+  </div>
+</section>
+
+{% endblock %}

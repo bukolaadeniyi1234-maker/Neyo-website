@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ product.name }} — Neyo Farms Shop{% endblock %}
+{% block content %}
+<section class="section" style="padding-top:7rem;">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-img"><img src="{{ product.image_url or '' }}" alt="{{ product.name }}" style="width:100%;height:100%;object-fit:cover;"/></div>
+      <div>
+        <div style="font-size:0.75rem;font-weight:600;letter-spacing:0.12em;text-transform:uppercase;color:var(--green-light);margin-bottom:0.5rem;">{{ product.category }}</div>
+        <h1 style="font-size:2.2rem;color:var(--green-deep);margin-bottom:1rem;">{{ product.name }}</h1>
+        <div style="font-family:var(--ff-display);font-size:2rem;font-weight:900;color:var(--green-mid);margin-bottom:0.5rem;">&#x20A6;{{ "{:,.0f}".format(product.price) }}</div>
+        <div style="font-size:0.85rem;color:var(--text-muted);margin-bottom:1.5rem;">per {{ product.unit }}</div>
+        <p style="color:var(--text-muted);line-height:1.8;margin-bottom:2rem;">{{ product.description }}</p>
+        <div style="display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="/order/{{ product.id }}" class="btn btn--primary">Order Now</a>
+          <a href="/shop" class="btn btn--outline" style="color:var(--green-deep);border-color:var(--green-mid);">Back to Shop</a>
+        </div>
+        <div style="margin-top:1.5rem;padding:1rem;background:var(--ivory-dark);border-radius:8px;font-size:0.85rem;color:var(--text-muted);">
+          <strong>Stock:</strong> {{ product.stock }} {{ product.unit }}s available
+        </div>
+      </div>
+    </div>
+    {% if related %}
+    <div style="margin-top:4rem;">
+      <h3 style="margin-bottom:1.5rem;">Related Products</h3>
+      <div class="products-grid">
+        {% for p in related %}
+        <div class="product-card">
+          <img class="product-card__img" src="{{ p.image_url }}" alt="{{ p.name }}" />
+          <div class="product-card__body">
+            <div class="product-card__name">{{ p.name }}</div>
+            <div class="product-card__footer">
+              <div class="product-card__price">&#x20A6;{{ "{:,.0f}".format(p.price) }}</div>
+              <a href="/order/{{ p.id }}" class="btn btn--green btn--sm">Order</a>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

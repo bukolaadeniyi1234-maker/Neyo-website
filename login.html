@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="auth-page">
+  <div class="auth-card">
+    <div class="auth-card__logo">&#x1F33F; NEYO FARMS</div>
+    <h2>Welcome Back</h2>
+    <p>Sign in to your account</p>
+    <form method="POST">
+      <div class="form-group"><label>Email</label><input name="email" type="email" required placeholder="your@email.com" /></div>
+      <div class="form-group"><label>Password</label><input name="password" type="password" required placeholder="Your password" /></div>
+      <button type="submit" class="btn btn--primary" style="width:100%;margin-top:0.5rem;">Sign In</button>
+    </form>
+    <div class="auth-footer">Don't have an account? <a href="/register">Register here</a></div>
+  </div>
+</div>
+{% endblock %}

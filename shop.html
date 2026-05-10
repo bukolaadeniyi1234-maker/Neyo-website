@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Shop — Neyo Integrated Farm Services{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <h1>Farm Shop</h1>
+  <p>Order fresh produce directly from the farm</p>
+  <div class="breadcrumb"><a href="/">Home</a> / Shop</div>
+</div>
+<section class="section">
+  <div class="container">
+    <div class="shop-filters">
+      <button class="filter-btn {% if not active_category %}active{% endif %}" data-cat="">All Products</button>
+      <button class="filter-btn {% if active_category == 'crops' %}active{% endif %}" data-cat="crops">Crops</button>
+      <button class="filter-btn {% if active_category == 'poultry' %}active{% endif %}" data-cat="poultry">Poultry</button>
+      <button class="filter-btn {% if active_category == 'fish' %}active{% endif %}" data-cat="fish">Fish</button>
+      <button class="filter-btn {% if active_category == 'snails' %}active{% endif %}" data-cat="snails">Snails</button>
+      <button class="filter-btn {% if active_category == 'pig' %}active{% endif %}" data-cat="pig">Pig / Pork</button>
+    </div>
+    {% if products %}
+    <div class="products-grid">
+      {% for p in products %}
+      <div class="product-card">
+        <img class="product-card__img" src="{{ p.image_url or 'https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=400' }}" alt="{{ p.name }}" />
+        <div class="product-card__body">
+          <div class="product-card__cat">{{ p.category }}</div>
+          <div class="product-card__name">{{ p.name }}</div>
+          <p class="product-card__desc">{{ p.description[:90] if p.description else '' }}...</p>
+          <div class="product-card__footer">
+            <div>
+              <div class="product-card__price">&#x20A6;{{ "{:,.0f}".format(p.price) }}</div>
+              <div class="product-card__unit">per {{ p.unit }}</div>
+            </div>
+            <div style="display:flex;gap:0.5rem;">
+              <a href="/shop/{{ p.id }}" class="btn btn--outline btn--sm" style="color:var(--green-mid);border-color:var(--green-mid);">Details</a>
+              <a href="/order/{{ p.id }}" class="btn btn--green btn--sm">Order</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:4rem 0;color:var(--text-muted);">
+      <p style="font-size:3rem;">&#x1F33F;</p>
+      <h3>No products in this category</h3>
+      <a href="/shop" class="btn btn--green" style="margin-top:1rem;">View All</a>
+    </div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

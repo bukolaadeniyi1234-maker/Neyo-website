@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block title %}Blog — Neyo Integrated Farm Services{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <h1>Farm Journal</h1>
+  <p>Insights, tips, and stories from the fields of Neyo Farms.</p>
+  <div class="breadcrumb"><a href="/">Home</a> / Blog</div>
+</div>
+<section class="section">
+  <div class="container">
+    {% if posts %}
+    <div class="blog-grid">
+      {% for post in posts %}
+      <div class="blog-card">
+        <img class="blog-card__img" src="{{ post.image_url or 'https://images.unsplash.com/photo-1523741543316-beb7fc7023d8?w=600' }}" alt="{{ post.title }}" />
+        <div class="blog-card__body">
+          <div class="blog-card__cat">{{ post.category or 'Farming' }}</div>
+          <h3 class="blog-card__title">{{ post.title }}</h3>
+          <p class="blog-card__excerpt">{{ post.excerpt or post.content[:120] }}...</p>
+          <div style="display:flex;justify-content:space-between;align-items:center;">
+            <a href="/blog/{{ post.slug }}" class="blog-card__link">Read More &rarr;</a>
+            <span style="font-size:0.75rem;color:var(--text-muted);">{{ post.created_at[:10] }}</span>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div style="text-align:center;padding:4rem;color:var(--text-muted);"><h3>No posts yet. Check back soon!</h3></div>
+    {% endif %}
+  </div>
+</section>
+{% endblock %}

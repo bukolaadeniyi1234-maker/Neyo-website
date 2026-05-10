@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}{{ post.title }} — Neyo Blog{% endblock %}
+{% block content %}
+<div class="page-hero">
+  <span class="section-label" style="color:var(--gold-light);">{{ post.category or 'Farming' }}</span>
+  <h1 style="font-size:clamp(1.8rem,3vw,3rem);">{{ post.title }}</h1>
+  <p>{{ post.created_at[:10] }}</p>
+  <div class="breadcrumb"><a href="/">Home</a> / <a href="/blog">Blog</a> / {{ post.title[:30] }}...</div>
+</div>
+<section class="section">
+  <div class="container" style="max-width:760px;">
+    {% if post.image_url %}<img src="{{ post.image_url }}" alt="{{ post.title }}" style="width:100%;border-radius:12px;margin-bottom:2rem;aspect-ratio:16/7;object-fit:cover;" />{% endif %}
+    <div style="font-size:1rem;line-height:1.9;color:var(--text);">{{ post.content | safe }}</div>
+    <div style="margin-top:3rem;padding-top:2rem;border-top:1px solid #eee;">
+      <a href="/blog" class="btn btn--green">&larr; Back to Blog</a>
+    </div>
+  </div>
+</section>
+{% endblock %}
